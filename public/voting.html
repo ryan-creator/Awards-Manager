@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="VotingModule">
+    <head>
+        <title>Select Nominees</title>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ajax-client.js"></script>
+    </head>
+
+
+    <body class="grey lighten-3"  ng-controller="VotingController as votCtrl">
+
+        <div class="purple darken-3 white-text dz-depth-4 s12 banner">
+            <div class="row">
+                <div class="col s8"><div class="maintxt"> Awards Manager</div></div>
+
+                <div class="col s4 right-align">
+                    <div class="row" style="padding: 0px; margin:0px">
+                        <div class="col s6 right-align">
+                           Name: {{votCtrl.loggedUserName}} <br/>
+                           Account: {{votCtrl.loggedUserType}}
+                        </div>
+                        <div class="col s6 right-align" onclick="logout()" >
+                            <a class="waves-effect waves-light btn purple darken-3" style="margin-top:5px;">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                                              
+        <div class="container">
+            <h5>Voting</h5>
+            <div class="row">
+                <div class="card z-depth-0 col s12 maincard">
+                    <div class="row">
+                        <div class="tabs-vertical">
+                            <!--tab button on the left-->
+                            <div class="col m4 s12">
+                                <ul class="tabs">
+                                    <li class="tab" ng-repeat="appSet in votCtrl.ApplicationsByCategory">
+                                        <a ng-if="$index === 0" class="tablinks active" href="#{{appSet.categoryName}}" ng-click="slCtrl.selectTab(appSet.categoryName)"> {{appSet.categoryName}}</a>
+                                        <a ng-if="$index !== 0" class="tablinks" href="#{{appSet.categoryName}}" ng-click="slCtrl.selectTab(appSet.categoryName)"> {{appSet.categoryName}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- table panels with nominees on the right -->
+                            <div class="col m8 s12">
+                                <div ng-repeat="appSet in votCtrl.ApplicationsByCategory">
+                                    <div id="{{appSet.categoryName}}" class="tab-content"> 
+                                        <form action="#" ng-submit="votCtrl.submitVote(appSet.categoryName,vote)">
+                                            <!--nominee #n-->
+                                            <div class="row" style="margin:0px;" ng-repeat="application in appSet.applications">
+                                                <label for="{{application.applicationID}}">
+                                                    <input name="group-{{appSet.categoryName}}" type="radio" id="{{application.applicationID}}"
+                                                            value="{{application.applicationID}}"  [(ngModel)]="vote.applicationID"/>
+                                                    <div class="card z-depth-1 col s12" style="padding:15px 20px 0px 20px;">
+                                                        <div class="row">
+                                                            <div class="col s9">
+                                                                
+                                                                {{application.userCandidate}}<br>
+                                                                
+                                                            </div>
+                                                            <div class="col s3 right-align">
+                                                                <a href="{{application.linkToCV}}" target="_blank" class="waves-effect waves-light btn purple darken-3" style="margin-top:5px;">View CV</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="row" ng-show="appSet.applications.length">
+                                                <div class="input-field col s12">
+                                                    <textarea id="commenttxt" class="materialize-textarea" ng-model="vote.comment"/></textarea>
+                                                    <label for="commenttxt">Comment</label>
+                                                </div>
+                                            </div>
+                                            <div class="row right-align" ng-show="appSet.applications.length">
+                                                <button class="btn waves-effect waves-light purple darken-3" type="submit" name="action">
+                                                    Vote
+                                                </button>
+                                            </div>
+                                            <div ng-show="!appSet.applications.length">
+                                                <h6>No Applications to review in this category yet.</h6>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    {{votCtrl.inittabs()}}
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+             
+        </div>
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+     
+    </body>
+</html>

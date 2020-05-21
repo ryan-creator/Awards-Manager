@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="LoginModule">
+    <head>
+        <title>Login</title>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ajax-client.js"></script>
+    </head>
+
+    <body class="grey lighten-3" >
+
+        <div class="purple darken-3 white-text dz-depth-4 s12 banner">
+            <div class="row">
+                <div class="col s8"><div class="maintxt"> Awards Manager</div></div>
+                <!-- Removed logout button from login page -->
+            </div>
+        </div>
+
+        <div class="container" ng-controller="LoginController as lgCtrl">
+            <div class="row">
+                <div class="card z-depth-1 col s12 offset-m3 m6 offset-l4 l4" style="border-radius: 8px;margin-top:25px;padding:25px;">
+                    <form class="col s12" ng-submit="lgCtrl.login(credentials)">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email" type="text" class="validate" ng-model="credentials.user_id">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password" type="password" class="validate" ng-model="credentials.password">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row right-align">
+                            <button class="btn waves-effect waves-light purple darken-3" type="submit" name="action">
+                                Login
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+</html>

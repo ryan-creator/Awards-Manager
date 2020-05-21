@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="ApplicationModule">
+    <head>
+        <title>Fill Application</title>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ajax-client.js"></script>
+    </head>
+
+    <body class="grey lighten-3" ng-controller="ApplicationController as appCtrl">
+
+        <div class="purple darken-3 white-text dz-depth-4 s12 banner">
+            <div class="row">
+                <div class="col s8"><div class="maintxt"> Awards Manager</div></div>
+
+                <div class="col s4 right-align">
+                    <div class="row" style="padding: 0px; margin:0px">
+                        <div class="col s6 right-align">
+                            Name: {{appCtrl.loggedUserName}} <br/>
+                            Account: {{appCtrl.loggedUserType}}
+                        </div>
+                        <div class="col s6 right-align" onclick="logout()" >
+                            <a class="waves-effect waves-light btn purple darken-3" style="margin-top:5px;">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h5>Application: {{appCtrl.loggedUserName}} for {{appCtrl.application.category}}</h5>
+            <div class="row">
+
+                <div class="card z-depth-0 col s12 m10 offset-m1 l8 offset-l2 maincard">
+                    <form action="#" ng-submit="appCtrl.saveApplication(filled_application)">
+                        <div class="row">
+                            <div>{{appCtrl.application.personalStatement}}</div>
+                            <div class="input-field col s12">
+                                <textarea id="personalstatement" class="materialize-textarea" value="jnb" ng-model="filled_application.personalStatement">
+                                    
+                                </textarea>
+                                <label for="personalstatement">Personal Statement</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>{{appCtrl.application.linkToCV}}</div>
+                            <div class="input-field col s12">
+                                <textarea id="linktocv" class="materialize-textarea" ng-model="filled_application.linkToCV">
+                                    
+                                </textarea>
+                                <label for="linktocv">Link To CV</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>{{appCtrl.application.references}}</div>
+                            <div class="input-field col s12">
+                                <textarea id="references" class="materialize-textarea"  ng-model="filled_application.references">
+                                    
+                                </textarea>
+                                <label for="references">References</label>
+                            </div>
+                        </div>
+                        <div class="row right-align">
+                            <button class="btn waves-effect waves-light purple darken-3" type="submit" name="action">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        {{appCtrl.inittxt()}}
+    </body>
+</html>

@@ -1,0 +1,33 @@
+CREATE TABLE "Application" (
+	"applicationID"	VARCHAR(10),
+	"userCandidate"	VARCHAR(30) NOT NULL,
+	"category"	VARCHAR(50) NOT NULL,
+	"linkToCV"	VARCHAR(200) NOT NULL,
+	"personalStatement"	VARCHAR(750),
+	"candidateReferences"	VARCHAR(750),
+	"status"	VARCHAR(15) NOT NULL,
+	PRIMARY KEY("applicationID"),
+	FOREIGN KEY("userCandidate") REFERENCES "User"("userID")
+);
+
+CREATE TABLE "User" (
+	"userID"	VARCHAR(30),
+	"staffID"	VARCHAR(10) NOT NULL,
+	"firstName"	VARCHAR(50) NOT NULL,
+	"lastName"	VARCHAR(50) NOT NULL,
+	"email"         VARCHAR(100) NOT NULL,
+	"department"	VARCHAR(30) NOT NULL,
+	"userType"	VARCHAR(30) NOT NULL,
+	"password"	VARCHAR(50) NOT NULL,
+	PRIMARY KEY("userID")
+);
+
+CREATE TABLE "Vote" (
+	"voteID"	VARCHAR(15),
+	"userID"	VARCHAR(30) NOT NULL,
+	"applicationID"	VARCHAR(10) NOT NULL,
+	"comment"	VARCHAR(300),
+	PRIMARY KEY("userID"),
+	FOREIGN KEY("userID") REFERENCES "User"("userID"),
+	FOREIGN KEY("applicationID") REFERENCES "Application"("applicationID")
+);
